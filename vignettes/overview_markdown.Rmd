@@ -1,0 +1,70 @@
+---
+title: "Overview of the psych package"
+author: 
+  name: "William Revelle"
+  affiliation: "Department of Psychology, Northwestern University"
+  email: "revelle@northwestern.edu"
+package: psych
+date: "`r Sys.Date()`"
+output:
+      rmarkdown::html_vignette:
+        toc: true
+        fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Jump starting the psych package–a guide for the impatient
+
+You have installed *psych* (section [2](#started)) and you want to use it without reading much more.
+What should you do?
+
+1.  Activate the psych package:
+    ```{r}
+    library(psych)
+    ```
+2.   Input your data (section 3.1). Go to your friendly text editor or data manipulation program (e.g., Excel) and copy the data to the clipboard. Include a first line that has the variable labels. Paste it into psych using the read.clipboard.tab command:
+    ```r
+    myData <- read.clipboard.tab()
+    ```
+3.  Make sure that what you just read is right. Describe it (section 3.2) and perhaps look at the first and last few lines:
+    ```r
+    describe(myData)
+    headTail(myData)
+    ````
+4.  Look at the patterns in the data. If you have fewer than about 10 variables, look at the SPLOM (Scatter Plot Matrix) of the data using pairs.panels (section 3.3.1) Even better, use the outlier to detect outliers.
+    ```r
+    pairs.panels(myData)
+    outlier(myData)
+    ```
+5.  Note that you have some weird subjects, probably due to data entry errors. Either edit the data by hand (use the edit command) or just scrub the data (section 3.2.2).
+    ```r
+    cleaned <- scrub(myData,  max=9)  #e.g., change anything great than 9 to NA
+    ```
+6.  Graph the data with error bars for each variable (section 3.3.3).
+    ```r
+    error.bars(myData)
+    ```
+7.  Find the correlations of all of your data.
+    * Descriptively (just the values) (section 3.3.7)
+    ```r
+    r <- lowerCor(myData)
+    ```
+    * Graphically (section 3.3.8)
+    ```r
+    corPlot(r)
+    ```
+    * Inferentially (the values, the ns, and the p values) (section 3.4)
+    ```r
+    corr.test(myData)
+    ```
+    
+# Overview of this and related document
+
+# Getting started {#started}
+
+# Basic data analysis
+
+## Data input from the clipboard
